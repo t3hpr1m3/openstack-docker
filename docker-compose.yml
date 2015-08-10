@@ -1,0 +1,15 @@
+app:
+  build: .
+  hostname: controller
+  ports:
+    - 5000
+    - 35357
+    - 9292
+  links:
+    - db
+  environment:
+    MYSQL_ROOT_PASSWORD: firma8isdead
+db:
+  image: mariadb
+  environment:
+    MYSQL_ROOT_PASSWORD: firma8isdead
