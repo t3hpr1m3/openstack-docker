@@ -1,15 +1,25 @@
 app:
   build: .
-  hostname: controller
+keystone:
+  build: keystone
+  hostname: keystone
   ports:
     - 5000
     - 35357
-    - 9292
   links:
     - db
+    - rabbit
+    - memcache
   environment:
     MYSQL_ROOT_PASSWORD: firma8isdead
 db:
-  image: mariadb
+  image: mariadb:5.5.45
   environment:
     MYSQL_ROOT_PASSWORD: firma8isdead
+rabbit:
+  image: rabbitmq:3.5.4
+  environment:
+    RABBITMQ_DEFAULT_USER: openstack
+    RABBITMQ_DEFAULT_PASS: firma8isdead
+memcache:
+  image: memcached:1.4.24
