@@ -1,5 +1,5 @@
 cli:
-  build: .
+  build: cli
   links:
     - db
     - rabbit

@@ -1,0 +1,3 @@
+data/glance/*
+data/mysql/*
+data/rabbitmq/*

@@ -1,17 +1,12 @@
-FROM ubuntu:trusty
+FROM openstack/base
 
-ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update && apt-get -y install ubuntu-cloud-keyring
-RUN echo "deb http://ubuntu-cloud.archive.canonical.com/ubuntu" \
-		"trusty-updates/kilo main" > /etc/apt/sources.list.d/cloudarchive-kilo.list
-RUN apt-get update && apt-get -y install \
+RUN apt-get -y install \
 		keystone \
 		python-keystoneclient \
 		python-mysqldb \
 		mysql-client \
 		apache2 \
 		libapache2-mod-wsgi \
-		curl \
 	&& apt-get clean
 
 RUN mkdir /opt/keystone
