@@ -9,6 +9,9 @@ RUN apt-get -y install \
 		libapache2-mod-wsgi \
 	&& apt-get clean
 
+RUN ln -sf /dev/stdout /var/log/apache2/access.log
+RUN ln -sf /dev/stderr /var/log/apache2/error.log
+
 RUN mkdir /opt/keystone
 
 COPY wsgi-keystone.conf /etc/apache2/sites-available/

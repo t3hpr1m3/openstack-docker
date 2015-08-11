@@ -5,6 +5,8 @@ cli:
     - rabbit
     - memcache
     - keystone
+    - glanceregistry
+    - glanceapi
 data:
   build: data
   volumes:
@@ -13,6 +15,8 @@ data:
     - data/glance:/var/lib/glance/images
 keystone:
   build: keystone
+  volumes:
+    - keystone:/keystone-src
   hostname: keystone
   ports:
     - 5000
@@ -21,6 +25,33 @@ keystone:
     - db
     - rabbit
     - memcache
+  environment:
+    MYSQL_ROOT_PASSWORD: firma8isdead
+glanceregistry:
+  build: glance-registry
+  hostname: glanceregistry
+  ports:
+    - 9191
+  links:
+    - db
+    - rabbit
+    - memcache
+    - keystone
+  environment:
+    MYSQL_ROOT_PASSWORD: firma8isdead
+glanceapi:
+  build: glance-api
+  hostname: glanceapi
+  ports:
+    - 9292
+  volumes_from:
+    - data
+  links:
+    - db
+    - rabbit
+    - memcache
+    - keystone
+    - glanceregistry
   environment:
     MYSQL_ROOT_PASSWORD: firma8isdead
 db:

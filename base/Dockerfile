@@ -7,3 +7,5 @@ RUN echo "deb http://ubuntu-cloud.archive.canonical.com/ubuntu" \
 RUN apt-get update && apt-get -y install \
 		curl \
 	&& apt-get clean
+
+COPY functions.sh /opt/openstack/functions.sh

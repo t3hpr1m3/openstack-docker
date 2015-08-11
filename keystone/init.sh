@@ -1,4 +1,5 @@
 #!/bin/bash
 
 /opt/keystone/bootstrap.sh
-/usr/sbin/apachectl -D FOREGROUND
+. /etc/apache2/envvars
+exec /usr/sbin/apache2 -D FOREGROUND

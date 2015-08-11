@@ -8,4 +8,6 @@ RUN apt-get -y install \
 		rabbitmq-server \
 	&& apt-get clean
 
+COPY admin-openrc.sh /admin-openrc.sh
+
 CMD ["/bin/bash"]
