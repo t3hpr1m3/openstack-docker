@@ -1,5 +1,16 @@
-app:
+cli:
   build: .
+  links:
+    - db
+    - rabbit
+    - memcache
+    - keystone
+data:
+  build: data
+  volumes:
+    - data/mysql:/var/lib/mysql
+    - data/rabbitmq:/var/lib/rabbitmq
+    - data/glance:/var/lib/glance/images
 keystone:
   build: keystone
   hostname: keystone
@@ -16,10 +27,16 @@ db:
   image: mariadb:5.5.45
   environment:
     MYSQL_ROOT_PASSWORD: firma8isdead
+  ports:
+    - 3306
+  volumes_from:
+    - data
 rabbit:
   image: rabbitmq:3.5.4
   environment:
     RABBITMQ_DEFAULT_USER: openstack
     RABBITMQ_DEFAULT_PASS: firma8isdead
+  volumes_from:
+    - data
 memcache:
   image: memcached:1.4.24

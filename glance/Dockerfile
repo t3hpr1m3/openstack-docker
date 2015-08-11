@@ -5,12 +5,18 @@ RUN apt-get update && apt-get -y install ubuntu-cloud-keyring
 RUN echo "deb http://ubuntu-cloud.archive.canonical.com/ubuntu" \
 		"trusty-updates/kilo main" > /etc/apt/sources.list.d/cloudarchive-kilo.list
 RUN apt-get update && apt-get -y install \
-		python-openstackclient \
-		python-keystoneclient \
-		python-glanceclient \
+		python-mysqldb \
 		mysql-client \
-		rabbitmq-server \
+		python-memcache \
+		python-keystoneclient \
+		glance \
 		curl \
 	&& apt-get clean
 
-CMD ["/bin/bash"]
+RUN mkdir /opt/glance-registry
+# COPY glance/glance-api.conf /etc/glance/
+COPY glance/glance-registry.conf /etc/glance/
+
+EXPOSE 9292
+
+CMD ["/opt/openstack/init"]
