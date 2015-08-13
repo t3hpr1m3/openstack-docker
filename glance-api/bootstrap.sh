@@ -17,6 +17,7 @@ add_role_to_user \
 	"service" \
 	"admin"
 create_endpoint \
-	"http://glance-api:9292" \
-	"http://glance-api:9292" \
-	"http://glance-api:9292"
+	"http://glanceapi:9292" \
+	"http://glanceapi:9292" \
+	"http://glanceapi:9292" \
+	"glance"

@@ -40,7 +40,7 @@ create_service () {
 			--os-token $KEYSTONE_TOKEN \
 			service-create \
 			--name $service_name \
-			--description "$service_desc" \
+			--description "$service_description" \
 			--type $service_type
 
 		if [ $? -ne 0 ]; then
