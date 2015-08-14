@@ -5,24 +5,16 @@ RUN apt-get -y install \
 		mysql-client \
 		python-memcache \
 		python-keystoneclient \
-		nova-api \
-		nova-cert \
-		nova-conductor \
-		nova-consoleauth \
-		nova-novncproxy \
-		nova-scheduler \
-		python-novaclient \
+		nova-compute \
+		sysfsutils \
 		supervisor \
 	&& apt-get clean
 
-RUN mkdir /opt/nova-server/
+RUN mkdir /opt/nova-node/
 COPY nova.conf /etc/nova/
 RUN chown nova: /etc/nova/nova.conf
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-COPY bootstrap.sh /opt/nova-server/
-COPY bootstrap.sql /opt/nova-server/
-
-EXPOSE 8774
+COPY bootstrap.sh /opt/nova-node/
 
 CMD ["/usr/bin/supervisord"]

@@ -69,6 +69,21 @@ novacontroller:
   privileged: true
   environment:
     MYSQL_ROOT_PASSWORD: firma8isdead
+novanode:
+  build: nova-node
+  hostname: novanode
+  links:
+    - rabbit
+    - glanceapi
+horizon:
+  build: horizon
+  hostname: horizon
+  ports:
+    - 80
+  links:
+    - keystone
+    - novacontroller
+    - glanceapi
 db:
   image: mariadb:5.5.45
   environment:
