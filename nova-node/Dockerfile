@@ -8,7 +8,10 @@ RUN apt-get -y install \
 		nova-compute \
 		sysfsutils \
 		supervisor \
+		python-pip \
 	&& apt-get clean
+
+RUN pip install supervisor-stdout
 
 RUN mkdir /opt/nova-node/
 COPY nova.conf /etc/nova/

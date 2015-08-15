@@ -11,6 +11,8 @@ COPY init.sh /opt/horizon/
 
 COPY local_settings.py /etc/openstack-dashboard/
 
+VOLUME /var/log/apache2
+
 EXPOSE 80
 
 CMD ["/opt/horizon/init.sh"]
